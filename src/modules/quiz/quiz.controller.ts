@@ -23,8 +23,6 @@ export class QuizController {
   @HttpCode(200)
   @UsePipes(ValidationPipe)
   createQuiz(@Body() quizData: CreateQuizDto) {
-    return {
-      data: quizData,
-    };
+    return this.quizService.createQuiz(quizData);
   }
 }
