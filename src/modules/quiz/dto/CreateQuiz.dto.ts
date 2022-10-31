@@ -1,4 +1,4 @@
-import { IsNotEmpty, Length } from 'class-validator';
+import { IsNotEmpty, IsOptional, Length } from 'class-validator';
 
 export class CreateQuizDto {
   @IsNotEmpty({ message: 'Title is mandatory' })
@@ -8,4 +8,7 @@ export class CreateQuizDto {
   @IsNotEmpty()
   @Length(3)
   description: string;
+
+  @IsOptional()
+  choices: string[];
 }

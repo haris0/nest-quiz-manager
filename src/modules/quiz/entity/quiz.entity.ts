@@ -18,8 +18,8 @@ export class Quiz extends BaseEntity {
   description: string;
 
   @Column({
-    type: 'boolean',
-    default: 1,
+    type: 'json',
+    nullable: true,
   })
-  isActive: boolean;
+  choices: string[];
 }
