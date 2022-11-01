@@ -10,5 +10,5 @@ export class UpdateQuizDto {
   description: string;
 
   @IsOptional()
-  choices: string[];
+  questions: string[];
 }

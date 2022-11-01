@@ -1,7 +1,14 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Question } from './question.entity';
 
 @Entity('quizes')
-export class Quiz extends BaseEntity {
+export class Quiz {
   @PrimaryGeneratedColumn({
     comment: 'The Quiz unique identifire',
   })
@@ -17,9 +24,7 @@ export class Quiz extends BaseEntity {
   })
   description: string;
 
-  @Column({
-    type: 'json',
-    nullable: true,
-  })
-  choices: string[];
+  @JoinTable()
+  @ManyToMany(() => Question, { cascade: true })
+  questions: Question[];
 }
