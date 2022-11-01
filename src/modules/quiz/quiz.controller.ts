@@ -6,10 +6,12 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { CreateQuizDto } from './dto/create-quiz.dto';
+import { PaginationDto } from './dto/pagination.dto';
 import { UpdateQuizDto } from './dto/update-quiz.dto';
 import { QuizService } from './quiz.service';
 
@@ -18,8 +20,8 @@ export class QuizController {
   constructor(private quizService: QuizService) {}
 
   @Get('')
-  getAllQuiz() {
-    return this.quizService.findAll();
+  getAllQuiz(@Query() paginationQuery: PaginationDto) {
+    return this.quizService.findAll(paginationQuery);
   }
 
   @Get(':id')

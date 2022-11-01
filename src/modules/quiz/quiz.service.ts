@@ -6,6 +6,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateQuizDto } from './dto/create-quiz.dto';
+import { PaginationDto } from './dto/pagination.dto';
 import { UpdateQuizDto } from './dto/update-quiz.dto';
 import { Question } from './entity/question.entity';
 import { Quiz } from './entity/quiz.entity';
@@ -19,9 +20,12 @@ export class QuizService {
     private readonly questionRepository: Repository<Question>,
   ) {}
 
-  findAll = async () => {
+  findAll = async (pagination: PaginationDto) => {
+    const { limit, offset } = pagination;
     return this.quizRepository.find({
       relations: ['questions'],
+      skip: offset,
+      take: limit,
     });
   };
 
